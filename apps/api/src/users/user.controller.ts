@@ -3,7 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import type { Request } from 'express';
 
 @Controller('users')
-export class UsersController {
+export class UserController {
   @Get('me')
   @UseGuards(AuthGuard('jwt'))
   getMe(@Req() req: Request) {

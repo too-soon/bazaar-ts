@@ -8,14 +8,14 @@ export enum SocialProvider {
 @Entity('social_accounts')
 export class SocialAccount {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
-  @Column()
-  provider: SocialProvider;
+  @Column({ enum: SocialProvider })
+  provider!: string;
 
   @Column({ unique: true })
-  providerId: string;
+  providerId!: string;
 
   @ManyToOne(() => User, (user) => user.socialAccounts)
-  user: User;
+  user!: User;
 }

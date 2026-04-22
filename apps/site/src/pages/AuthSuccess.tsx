@@ -18,6 +18,7 @@ const AuthSuccess: React.FC = () => {
 
         const data = await response.json();
         console.log("User data:", data);
+        /** @todo save user data to state or context */
       } catch (error) {
         console.error("Error fetching user data:", error);
         navigate("/");
@@ -30,16 +31,13 @@ const AuthSuccess: React.FC = () => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
         fontFamily: "system-ui, -apple-system, sans-serif",
+        textAlign: "center",
       }}
     >
       <h1>Authentication Successful</h1>
       <p>You have been successfully authenticated.</p>
+      <p><a href="/">Home</a></p>
     </div>
   );
 };
