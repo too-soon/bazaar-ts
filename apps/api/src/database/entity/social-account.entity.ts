@@ -16,6 +16,12 @@ export class SocialAccount {
   @Column({ unique: true })
   providerId!: string;
 
+  @Column()
+  email!: string;
+
+  @Column({ nullable: true })
+  image!: string;
+
   @ManyToOne(() => User, (user) => user.socialAccounts)
   user!: User;
 }

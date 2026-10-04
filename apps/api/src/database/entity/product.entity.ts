@@ -1,6 +1,10 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Store } from './store.entity';
 
+const ProductVisibility = { PUBLIC: 'public', PRIVATE: 'private' } as const;
+type ProductVisibility =
+  (typeof ProductVisibility)[keyof typeof ProductVisibility];
+
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn('uuid')
@@ -18,6 +22,12 @@ export class Product {
   /** @todo must be unique per store */
   @Column()
   slug!: string;
+
+  @Column({ enum: ProductVisibility, default: ProductVisibility.PUBLIC })
+  visibility!: ProductVisibility;
+
+  @Column({ default: 0 })
+  stock!: number;
 
   /** @maybe DimensionGroup relationship */
   // weight!: number;
