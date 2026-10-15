@@ -13,4 +13,7 @@ export default defineConfig({
       module: { type: 'nodenext' },
     }),
   ],
+  resolve: {
+    tsconfigPaths: true,
+  },
 });

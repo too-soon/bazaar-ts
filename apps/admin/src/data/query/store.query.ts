@@ -80,3 +80,18 @@ export const fetchUpdateStore = async (
   console.log("Updated store data:", data);
   return data;
 };
+
+export const fetchDeleteStore = async (id: string): Promise<void> => {
+  const response = await fetch(`${API_URL}/stores/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const error = (await response.json()) as { message?: string | string[] };
+    const message = Array.isArray(error.message)
+      ? error.message.join(", ")
+      : error.message;
+    throw new Error(message ?? "Failed to delete store");
+  }
+};

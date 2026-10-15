@@ -2,8 +2,8 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { UserService } from 'domain/user/user.service';
-import { SocialProvider } from 'database/entity/social-account.entity';
+import { UserService } from '@/domain/user/user.service';
+import { SocialProvider } from '@/database/entity/social-account.entity';
 
 interface GoogleProfile {
   id: string;

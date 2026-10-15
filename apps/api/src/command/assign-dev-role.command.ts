@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { Role } from 'database/entity/user.entity';
-import { UserService } from 'domain/user/user.service';
+import { Role } from '@/database/entity/user.entity';
+import { UserService } from '@/domain/user/user.service';
 import { Command, CommandRunner } from 'nest-commander';
 
 @Injectable()

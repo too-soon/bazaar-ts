@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PGliteDriver } from 'typeorm-pglite';
 import { uuid_ossp } from '@electric-sql/pglite/contrib/uuid_ossp';
-import { User } from './entity/user.entity';
+import { Document, User } from './entity/user.entity';
 import { Address } from './entity/address.entity';
 import { SocialAccount } from './entity/social-account.entity';
 import { Store } from './entity/store.entity';
 import { Product } from './entity/product.entity';
 import { ConfigModule } from '@nestjs/config';
+import { Association } from './entity/association.entity';
 
 // Create a shared in-memory instance or new one per test
 export const pglite = new PGliteDriver({
@@ -16,7 +17,15 @@ export const pglite = new PGliteDriver({
   },
 });
 
-const entities = [User, Address, SocialAccount, Store, Product];
+const entities = [
+  User,
+  Address,
+  SocialAccount,
+  Store,
+  Product,
+  Association,
+  Document,
+];
 
 @Module({
   imports: [

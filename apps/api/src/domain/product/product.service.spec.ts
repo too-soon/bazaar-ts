@@ -5,8 +5,8 @@ import { Product } from '../database/entity/product.entity';
 import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
 import { getPGliteInstance } from 'typeorm-pglite';
 import { test, beforeAll, describe, afterAll, expect } from 'vitest';
-import { Store } from 'database/entity/store.entity';
-import { StoreService } from 'domain/store/store.service';
+import { Store } from '@/database/entity/store.entity';
+import { StoreService } from '@/domain/store/store.service';
 
 describe('ProductService (PGlite)', () => {
   let service: ProductService;

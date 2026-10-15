@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
-import { UserService } from 'domain/user/user.service';
+import { UserService } from '@/domain/user/user.service';
 
 interface Payload {
   sub: string;

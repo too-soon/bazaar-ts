@@ -1,6 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Store } from 'database/entity/store.entity';
+import { Store } from '../../database/entity/store.entity';
 import { Repository } from 'typeorm';
 import { CreateStoreDto } from './dto/create-store.dto';
 
@@ -27,9 +31,25 @@ export class StoreService {
   async updateOne(id: string, data: CreateStoreDto) {
     const store = await this.storeRepository.findOne({ where: { id } });
     if (!store) {
-      throw new Error('Store not found');
+      throw new NotFoundException('Store not found');
     }
     Object.assign(store, data);
     return this.storeRepository.save(store);
+  }
+
+  async deleteOne(id: string) {
+    const store = await this.storeRepository.findOne({
+      where: { id },
+      relations: { products: true },
+    });
+    if (!store) {
+      throw new NotFoundException('Store not found');
+    }
+    /** @todo possibly soft delete or cascading */
+    if (store.products.length > 0) {
+      throw new ConflictException('Cannot delete a store that has products');
+    }
+
+    return this.storeRepository.remove(store);
   }
 }

@@ -1,9 +1,12 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Store } from './store.entity';
 
-const ProductVisibility = { PUBLIC: 'public', PRIVATE: 'private' } as const;
-type ProductVisibility =
-  (typeof ProductVisibility)[keyof typeof ProductVisibility];
+// enum ProductVisibility = { PUBLIC: 'public', PRIVATE: 'private' } as const;
+
+enum ProductVisibility {
+  PUBLIC = 'public',
+  PRIVATE = 'private',
+}
 
 @Entity()
 export class Product {
@@ -16,7 +19,13 @@ export class Product {
   @ManyToOne(() => Store, (store) => store.products)
   store!: Store;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true, default: null })
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    nullable: true,
+    default: null,
+  })
   price!: number;
 
   /** @todo must be unique per store */

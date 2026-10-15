@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -37,5 +38,10 @@ export class StoreController {
   @Put(':id')
   updateOne(@Body() dto: CreateStoreDto, @Param('id') id: string) {
     return this.storeService.updateOne(id, dto);
+  }
+
+  @Delete(':id')
+  deleteOne(@Param('id') id: string) {
+    return this.storeService.deleteOne(id);
   }
 }

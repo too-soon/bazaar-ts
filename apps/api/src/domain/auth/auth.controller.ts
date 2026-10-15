@@ -3,7 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
 import type { Response } from 'express';
 import { AuthService } from './auth.service';
-import { User } from 'database/entity/user.entity';
+import { User } from '@/database/entity/user.entity';
 
 @Controller('auth')
 export class AuthController {
