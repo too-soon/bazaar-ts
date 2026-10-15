@@ -49,6 +49,6 @@
 - Search/filter products
 - Product page
 
-# Planned systems
+# Systems
 - Notification
 - Email queue

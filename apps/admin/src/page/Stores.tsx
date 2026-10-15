@@ -31,6 +31,7 @@ const Stores: FC = () => {
                 <Table.Cell>{item.id}</Table.Cell>
                 <Table.Cell>
                   <Link to={`/store/${item.id}/edit`}>Edit</Link>
+                  <Link to={`/store/${item.id}/delete`}>Delete</Link>
                 </Table.Cell>
               </Table.Row>
             ))}

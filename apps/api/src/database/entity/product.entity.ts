@@ -16,7 +16,7 @@ export class Product {
   @ManyToOne(() => Store, (store) => store.products)
   store!: Store;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true, default: null })
   price!: number;
 
   /** @todo must be unique per store */

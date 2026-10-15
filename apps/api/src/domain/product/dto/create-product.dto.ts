@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class CreateProductDto {
@@ -6,10 +5,12 @@ export class CreateProductDto {
   @IsString()
   title!: string;
 
-  @Transform(({ value }: { value: string }) => ({
-    id: value,
-  }))
   @IsNotEmpty()
   @IsUUID()
   storeId!: string;
+
+  /** @todo do not allow whitespace and symbols */
+  @IsNotEmpty()
+  @IsString()
+  slug!: string;
 }

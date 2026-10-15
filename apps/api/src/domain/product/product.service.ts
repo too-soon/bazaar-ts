@@ -20,8 +20,13 @@ export class ProductService {
   }
 
   /** @todo Add conversion/transform method from CreateProductDto to Product */
-  async createProduct(createProductDto: CreateProductDto) {
-    const product = this.productRepository.create(createProductDto);
+  async createProduct(input: CreateProductDto) {
+    const { title, slug, storeId } = input;
+    const product = this.productRepository.create({
+      title,
+      slug,
+      store: { id: storeId },
+    });
 
     return this.productRepository.save(product);
   }

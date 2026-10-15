@@ -5,8 +5,7 @@ import { useActionState } from "react";
 import { fetchCreateStore } from "../data/query/store.query";
 import { useLoaderData } from "react-router-dom";
 
-// Mock submission action
-async function submitFormData(previousState: any, formData: FormData) {
+async function submitFormData(previousState: unknown, formData: FormData) {
   const name = formData.get("name") as string;
   const slug = formData.get("slug") as string;
 

@@ -8,9 +8,8 @@ import {
   Heading,
   Text,
 } from "@radix-ui/themes";
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { userContext } from "../data/middleware/auth";
 
 export default function Dashboard({
   children,

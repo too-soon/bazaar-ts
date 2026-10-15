@@ -5,8 +5,7 @@ import { useActionState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { fetchCreateProduct } from "../data/query/product.query";
 
-// Mock submission action
-async function submitFormData(previousState: any, formData: FormData) {
+async function submitFormData(previousState: unknown, formData: FormData) {
   const title = formData.get("title") as string;
   const storeId = formData.get("storeId") as string;
 
@@ -46,23 +45,6 @@ export default function ProductForm() {
           Form submitted successfully!
         </div>
       )}
-
-      {/* <div className="flex flex-col space-y-2">
-        <Label.Root
-          className="text-sm font-medium text-gray-700"
-          htmlFor="name"
-        >
-          Name
-        </Label.Root>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          defaultValue={state.values?.name || ""}
-          className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
-          placeholder="e.g., My Resource"
-        />
-      </div> */}
       <Box mb="5">
         <Flex mb="1">
           <Text as="label" htmlFor="title" size="2" weight="bold">
@@ -89,24 +71,6 @@ export default function ProductForm() {
           defaultValue={state.values?.storeId || ""}
         />
       </Box>
-
-      {/* <div className="flex flex-col space-y-2">
-        <Label.Root
-          className="text-sm font-medium text-gray-700"
-          htmlFor="slug"
-        >
-          Slug
-        </Label.Root>
-        <input
-          id="slug"
-          name="slug"
-          type="text"
-          defaultValue={state.values?.slug || ""}
-          className="px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
-          placeholder="e.g., my-resource"
-        />
-      </div> */}
-
       <Button type="submit" disabled={isPending} className="" variant="classic">
         {isPending ? "Submitting..." : "Submit"}
       </Button>
