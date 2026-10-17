@@ -1,5 +1,5 @@
 import { API_URL } from "../type/constants";
-import type { Product } from "../../../../api/src/database/entity/product.entity";
+import type { Product } from "@api";
 
 export const fetchProductList = async (): Promise<Product[] | null> => {
   const response = await fetch(`${API_URL}/products`, {
@@ -28,7 +28,12 @@ export const fetchCreateProduct = async (
       "Content-Type": "application/json",
     },
     credentials: "include",
-    body: JSON.stringify({ title, storeId, price: 0, slug: title.toLowerCase().replace(/\s+/g, "-") }), // Temporary slug generation
+    body: JSON.stringify({
+      title,
+      storeId,
+      price: 0,
+      slug: title.toLowerCase().replace(/\s+/g, "-"),
+    }), // Temporary slug generation
   });
 
   if (!response.ok) {

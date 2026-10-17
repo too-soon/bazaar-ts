@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Logger, Post } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 
 @Controller('products')
 export class ProductController {
+  private readonly logger = new Logger(ProductController.name);
   constructor(@Inject(ProductService) private productService: ProductService) {}
 
   @Get()
@@ -18,6 +19,7 @@ export class ProductController {
    */
   @Post()
   createProduct(@Body() payload: CreateProductDto) {
+    this.logger.verbose(payload);
     return this.productService.createProduct(payload);
   }
 }

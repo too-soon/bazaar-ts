@@ -24,7 +24,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
-       "@api": ["../api/exports.ts"]
+      "@api": ["../api/exports.ts"]
     }
   },
   "include": ["src"]

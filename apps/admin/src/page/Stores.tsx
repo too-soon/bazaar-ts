@@ -2,7 +2,7 @@ import { type FC, useState } from "react";
 import Layout from "../components/Layout";
 import { Button, Flex, Heading, Table } from "@radix-ui/themes";
 import { useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
-import type { Store } from "../../../api/src/database/entity/store.entity";
+import type { Store } from "@api";
 import Dashboard from "../components/Dashboard";
 import { fetchDeleteStore } from "../data/query/store.query";
 

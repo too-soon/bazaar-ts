@@ -1,5 +1,5 @@
 import type { LoaderFunctionArgs } from "react-router-dom";
-import type { Store } from "../../../../api/src/database/entity/store.entity";
+import type { Store } from "@api";
 import { API_URL } from "../type/constants";
 
 export const fetchStoreList = async (): Promise<Store[] | null> => {

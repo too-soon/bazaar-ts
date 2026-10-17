@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import { Button, Flex, Heading, Table } from "@radix-ui/themes";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
-import type { Product } from "../../../api/src/database/entity/product.entity";
+import type { Product } from "@api";
 
 const Products: FC = () => {
   const navigate = useNavigate();

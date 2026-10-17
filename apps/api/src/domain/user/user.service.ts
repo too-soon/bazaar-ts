@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Role, User } from '../../database/entity/user.entity';
+import { Role, User } from '@/database/entity/user.entity';
 import {
   SocialAccount,
   SocialProvider,
-} from '../../database/entity/social-account.entity';
+} from '@/database/entity/social-account.entity';
 
 interface SocialProfile {
   email: string;

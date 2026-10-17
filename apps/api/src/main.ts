@@ -4,7 +4,9 @@ import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+  });
   const configService = app.get(ConfigService);
   const siteUrl = configService.get<string>('SITE_URL');
 

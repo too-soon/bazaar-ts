@@ -2,9 +2,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from '../database/entity/product.entity';
+import { Product } from '@/database/entity/product.entity';
 import { test, beforeEach, describe, expect } from 'vitest';
-import { TestDatabaseModule } from '../database/test-database.provider';
+import { TestDatabaseModule } from '@/database/test-database.provider';
 
 describe('ProductController', () => {
   let controller: ProductController;

@@ -9,128 +9,67 @@ interface ApiCallOptions {
 
 interface ApiCallResponse<T> {
   success: boolean;
-  data: T | null;
-  error?: string;
+  data: T | Record<string, string[] | null>;
+  status?: string;
 }
 
-export const apiCall = async <T = any>(
-  options: ApiCallOptions,
-): Promise<ApiCallResponse<T>> => {
-  const response = await fetch(`${API_URL}${options.path}`, {
-    ...options,
+export const apiCall = async <T = any>({
+  method,
+  body,
+  path,
+}: ApiCallOptions): Promise<ApiCallResponse<T>> => {
+  const response = await fetch(`${API_URL}/${path}`, {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: body ? JSON.stringify(body) : undefined,
     credentials: "include",
   });
-  console.log("API Call Response:", response); // Debug log
 
   /** @todo Role based auth */
-  if (!response.ok) {
-    if (response.status === 401) {
-      return { success: false, data: null, error: "Unauthorized" };
-    }
+  const data = await response.json();
+  console.log("API Response:", data); // Debug log @TODO: remove
 
-    if (response.status === 403) {
-      return { success: false, data: null, error: "Forbidden" };
-    }
+  let status = "Unknown status";
+  let success = false;
 
-    if (response.status === 404) {
-      return { success: false, data: null, error: "Not Found" };
-    }
-
-    if (response.status === 500) {
-      return { success: false, data: null, error: "Internal Server Error" };
-    }
-
-    if (response.status === 503) {
-      return { success: false, data: null, error: "Service Unavailable" };
-    }
-
-    if (response.status === 400) {
-      return { success: false, data: null, error: "Bad Request" };
-    }
-
-    // throw new Error("Failed to fetch store list");
-    return { success: false, data: null, error: "Failed to fetch data" };
+  switch (response.status) {
+    case 200:
+      success = true;
+      status = "OK";
+      break;
+    case 201:
+      success = true;
+      status = "Created";
+      break;
+    case 401:
+      status = "Unauthorized";
+      break;
+    case 403:
+      status = "Forbidden";
+      break;
+    case 404:
+      status = "Not Found";
+      break;
+    case 400:
+      status = "Bad Request";
+      break;
+    case 422:
+      status = "Unprocessable Entity";
+      break;
+    case 500:
+      status = "Internal Server Error";
+      break;
+    case 503:
+      status = "Service Unavailable";
+      break;
+    default:
+      status = `Unexpected status code: ${response.status}`;
+      break;
   }
 
-  const data = await response.json();
-  return { success: true, data, error: undefined };
+  return {
+    success,
+    data,
+    status,
+  };
 };
-
-// export const fetchStoreList = async (): Promise<Store[] | null> => {
-//   const response = await fetch(`${API_URL}/stores`, {
-//     credentials: "include",
-//   });
-
-//   /** @todo Role based auth */
-//   if (!response.ok) {
-//     // throw new Error("Failed to fetch store list");
-//     return null;
-//   }
-
-//   const data = await response.json();
-//   console.log("Store list data:", data); // Debug log
-//   return data;
-// };
-
-// export const fetchCreateStore = async (
-//   name: string,
-//   slug: string,
-// ): Promise<Store> => {
-//   const response = await fetch(`${API_URL}/stores`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     credentials: "include",
-//     body: JSON.stringify({ name, slug }),
-//   });
-
-//   if (!response.ok) {
-//     throw new Error("Failed to create store");
-//   }
-
-//   const data = await response.json();
-//   console.log("Created store data:", data); // Debug log
-//   return data;
-// };
-
-// export const fetchStoreDetails = async (
-//   args: LoaderFunctionArgs<{ id: string }>,
-// ): Promise<Store | null> => {
-//   const { params } = args;
-//   const response = await fetch(`${API_URL}/stores/${params.id}`, {
-//     credentials: "include",
-//   });
-
-//   if (!response.ok) {
-//     // throw new Error("Failed to fetch store details");
-//     return null;
-//   }
-
-//   const data = await response.json();
-//   console.log("Store details data:", data); // Debug log
-//   return data;
-// };
-
-// export const fetchUpdateStore = async (
-//   id: string,
-//   name: string,
-//   slug: string,
-// ): Promise<Store> => {
-//   const response = await fetch(`${API_URL}/stores/${id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     credentials: "include",
-//     body: JSON.stringify({ name, slug }),
-//   });
-
-//   if (!response.ok) {
-//     throw new Error("Failed to update store");
-//   }
-
-//   const data = await response.json();
-//   console.log("Updated store data:", data);
-//   return data;
-// };
